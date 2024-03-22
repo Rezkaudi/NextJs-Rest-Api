@@ -10,11 +10,14 @@ const SECRET_PAYLOAD = { password: bcrypt.hashSync("Rr1122002211Rr", 10) };
 // }
 
 export const POST = async (req) => {
-   const { password } = await req.json();
-   if (!password) {
-      return NextResponse.json({ message: 'Request body is required' }, { status: 400 });
-   }
+
    try {
+
+      const { password } = await req.json();
+      if (!password) {
+         return NextResponse.json({ message: 'Request body is required' }, { status: 400 });
+      }
+
       if (!bcrypt.compareSync(String(password), String(SECRET_PAYLOAD.password))) {
          return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
       }
@@ -34,8 +37,8 @@ export const POST = async (req) => {
 
 }
 
-export const config = {
-   api: {
-      bodyParser: true,
-   },
-};
+//export const config = {
+//   api: {
+//      bodyParser: true,
+//   },
+//};

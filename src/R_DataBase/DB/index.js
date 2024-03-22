@@ -1,5 +1,6 @@
-import fs from 'fs'
-import path from 'path'
+
+const fs = require('fs')
+const path = require('path')
 
 export class RDB {
     constructor() {
@@ -7,7 +8,7 @@ export class RDB {
     }
 
     readTable(tableName) {
-        const filePath = path.join(this.basePath, tableName);
+        const filePath = path.join(process.cwd(), 'src', 'R_DataBase', 'DB', tableName);
         console.log(filePath)
         if (fs.existsSync(filePath)) {
             const data = fs.readFileSync(filePath, 'utf8');
@@ -19,7 +20,7 @@ export class RDB {
     }
 
     updateTable(tableName, data) {
-        const filePath = path.join(this.basePath, tableName);
+        const filePath = path.join(process.cwd(), 'src', 'R_DataBase', 'DB', tableName, tableName);
         if (fs.existsSync(filePath)) {
             fs.writeFileSync(filePath, JSON.stringify(data));
             console.log(`File ${tableName} updated successfully.`);

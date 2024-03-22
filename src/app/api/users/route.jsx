@@ -55,8 +55,8 @@ export const PUT = withAuth(async (req) => {
    }
 });
 
-export const config = {
-   api: {
-      bodyParser: false,
-   },
-};
+//export const config = {
+//   api: {
+//      bodyParser: false,
+//   },
+//};
