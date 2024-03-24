@@ -15,7 +15,7 @@ export class RDB {
             return JSON.parse(data);
         } else {
             console.error(`File ${tableName} does not exist.`);
-            return null;
+            return filePath;
         }
     }
 
