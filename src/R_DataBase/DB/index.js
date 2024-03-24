@@ -8,7 +8,7 @@ export class RDB {
     }
 
     async readTable(tableName) {
-        const filePath = path.join(process.cwd(), 'src', 'R_DataBase', 'DB', tableName);
+        const filePath = path.join(__dirname, 'src', 'R_DataBase', 'DB', tableName);
         console.log(filePath)
         if (fs.existsSync(filePath)) {
             const data = await fs.readFileSync(filePath, 'utf8');
