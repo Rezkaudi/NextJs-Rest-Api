@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-export const GET = withAuth(async (req) => {
+export const GET = async (req) => {
    try {
       const data = await getData();
       return NextResponse.json(data, { "status": 200 });
@@ -13,7 +13,7 @@ export const GET = withAuth(async (req) => {
    } catch (error) {
       return NextResponse.json({ "message": "network error" }, { "status": 400 });
    }
-});
+};
 
 export const POST = withAuth(async (req) => {
 
