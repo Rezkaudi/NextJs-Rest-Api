@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const GET = withAuth(async (req) => {
    try {
-      const data = getData();
+      const data = await getData();
       return NextResponse.json(data, { "status": 200 });
 
    } catch (error) {
@@ -18,13 +18,14 @@ export const GET = withAuth(async (req) => {
 export const POST = withAuth(async (req) => {
 
    try {
-      const len = getData().length
-      const id = `${uuidv4()}N${len}`;
+      const oldData = await getData()
+      const id = `${uuidv4()}N${oldData.length}`;
       const { name, password } = await req.json()
       if (!name || !password)
          return NextResponse.json({ "message": "Missing required data" })
 
-      const newData = sendData({ id, name, password })
+      const newData = await sendData({ id, name, password })
+      console.log(newData);
 
       return NextResponse.json(newData, { "status": 200 });
 
@@ -54,9 +55,3 @@ export const PUT = withAuth(async (req) => {
       return NextResponse.json({ "message": "network error" }, { "status": 400 });
    }
 });
-
-//export const config = {
-//   api: {
-//      bodyParser: false,
-//   },
-//};

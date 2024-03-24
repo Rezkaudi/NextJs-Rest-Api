@@ -7,11 +7,10 @@ export class RDB {
         this.basePath = './src/R_DataBase/DB/';
     }
 
-    readTable(tableName) {
+    async readTable(tableName) {
         const filePath = path.join(process.cwd(), 'src', 'R_DataBase', 'DB', tableName);
-        console.log(filePath)
         if (fs.existsSync(filePath)) {
-            const data = fs.readFileSync(filePath, 'utf8');
+            const data = await fs.readFileSync(filePath, 'utf8');
             return JSON.parse(data);
         } else {
             console.error(`File ${tableName} does not exist.`);
@@ -19,10 +18,11 @@ export class RDB {
         }
     }
 
-    updateTable(tableName, data) {
-        const filePath = path.join(process.cwd(), 'src', 'R_DataBase', 'DB', tableName, tableName);
+    async updateTable(tableName, data) {
+        const filePath = path.join(process.cwd(), 'src', 'R_DataBase', 'DB', tableName);
         if (fs.existsSync(filePath)) {
-            fs.writeFileSync(filePath, JSON.stringify(data));
+            const oldData = await this.readTable(tableName)
+            fs.writeFileSync(filePath, JSON.stringify([...oldData, data]));
             console.log(`File ${tableName} updated successfully.`);
         } else {
             console.error(`File ${tableName} does not exist.`);

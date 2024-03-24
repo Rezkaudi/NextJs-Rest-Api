@@ -1,13 +1,12 @@
 import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid';
 
-const SECRET_KEY = uuidv4();
+const SECRET_KEY = "jkb4jk3b5m,43b5nj4hf89uydzsickhbjb4r43ui7fy6fgjfb43jh4384";
 
 
 // Replace with your own secret key
 
 export const generateToken = (payload) => {
-   return jwt.sign(payload, SECRET_KEY, { expiresIn: '2m' });
+   return jwt.sign(payload, SECRET_KEY, { expiresIn: '10m' });
 };
 
 export const verifyToken = (token) => {
